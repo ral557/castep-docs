@@ -34,51 +34,52 @@ If you want more information about a particular CASTEP keyword, or you want to f
 
 
 ## Example 1 - Silicon
-1. Copy the files to arcus
+1. Download the files to arcus
 
 	`$ wget http://www.castep.org/files/Si2.tgz`
 
 2. Unzip and untar them, then move into the new directory
 
-```
-$ gunzip Si2.tgz
-$ tar -xvf Si2.tar
-$ cd Si2
-```
+	```
+	$ gunzip Si2.tgz
+	$ tar -xvf Si2.tar
+	$ cd Si2
+	```
+
 3. Examine the CASTEP input files `Si2.cell` and `Si2.param` using your favourite text editor (e.g. `nano`).
 The `Si_00.usp` file is a pseudopotential file, you do not need to understand it at the moment.
 
-```
-$ nano Si2.cell
-$ nano Si2.param
-```
+	```
+	$ nano Si2.cell
+	$ nano Si2.param
+	```
+
 4. It is useful to view the structure before submitting your calculation using CASTEP. Copy the `Si2.cell` to your local machine using the sftp window (left) in mobaXterm.
 
 5. Cell Structure Visualisation
-	### Jmol.
+	* ### Jmol
 	To open the `Si2.cell` file using [Jmol](http://www.jmol.org):
 	Open Jmol (You will need to copy it from the shared drive to your desktop. Then double click `mol.jar`) 
 	then use `File => Open` and navigate to your `Si2.cell` file.
-	Alternatively, you can drag and drop the `Si2.cell` file into the Jmol window, and Jmol will open it.  
-
+	Alternatively, you can drag and drop the `Si2.cell` file into the Jmol window, and Jmol will open it. 
 	It can be helpful to view multiple repeat units of your unit cell.  The easiest way to do this in Jmol is to open a console window,
 	click File => Console and type:
+	
+		`$ load "" { 2 2 2 }`
+	
+		to show a 2x2x2 supercell.  Check the geometry of the input file is what you expect it to be before moving onto the next step.
 
-	`$ load "" { 2 2 2 }`
-
-	to show a 2x2x2 supercell.  Check the geometry of the input file is what you expect it to be before moving onto the next step.
-
-	### Vesta.
+	* ### Vesta
 	To open the `Si2.cell` file using [VESTA](http://www.jp-minerals.org/vesta/en/):
 	Open VESTA (You will need to copy it from the shared drive to your desktop. 
 	Then double click `VESTA.exe`) then use File => Open and navigate to your `Si2.cell` file.
 	You cannot drag and drop into VESTA.
 
-	If you wish to create a supercell as above, use `Objects => Boundary`. 
+		If you wish to create a supercell as above, use `Objects => Boundary`. 
 	Then edit the maximum and/or minimum values of x, y, and z in order to change your boundaries.
 	Setting `x(max)`, `y(max)`, and `z(max)` to 2 will create the 2 by 2 by 2 supercell as above. 
 
-	Check the geometry of the input file is as expected before moving on to the next step.
+		Check the geometry of the input file is as expected before moving on to the next step.
 
 6. Now run CASTEP on Arcus using the 2-atom input files.
 
@@ -90,23 +91,37 @@ $ nano Si2.param
 
 7. Copy the output files `Si2.castep` and `Si2.den_fmt` to the local machine using `sftp`.
 
-8. Jmol can also be used to view the isodensity map, open the `.castep` file by dragging and dropping the `Si2.castep` file into the Jmol window. 
+8. Visualisation of the charge density
+	* ### Jmol
+	Jmol can also be used to view the isodensity map, open the `.castep` file by dragging and dropping the `Si2.castep` file into the Jmol window. 
 
-	Open the Jmol console (File => Console) and type the following commands:
-
-```
-$ load "" { 2 2 2 }
-$ isosurface rho cutoff 14 "Si2.den_fmt" lattice { 2 2 2 }
-```
-	* Note: you can use the `cd` command within Jmol to navigate to the folder with your `.castep` files
-	* Jmol uses forward slash for paths to files on windows and linux based machines.
+		Open the Jmol console (File => Console) and type the following commands:
+		
+		```
+		$ load "" { 2 2 2 }
+		$ isosurface rho cutoff 14 "Si2.den_fmt" lattice { 2 2 2 }
+		```
+		
+		Note: you can use the `cd` command within Jmol to navigate to the folder with your `.castep` files.
+Jmol uses forward slash for paths to files on windows and linux based machines.
 This `Si2.den_fmt` file is a formatted file produced by CASTEP that contains the value of the electron density on a grid of points.  This isosurface command in Jmol plots an isodensity surface over your atomic positions.
 
-### Answer the following questions:
-1. Can you explain what you see as you vary the isosurface value?
-1. Can you see any features which might be characteristic of a covalently-bonded crystal.
-1. Do you notice anything strange about the electron density close to the Si nucleus? 
-1. Can you explain this as a consequence of the particular kind of electronic structure calculation you have just performed?
+	* ### Vesta
+	You will see a file called `Si2.den_fmt` which contains the charge density in a formatted (i.e. a human readable, ASCII file). We need to change this file into a format Vesta can read. Copy it to a file called `Si2.charg_frm`
+
+		```
+		cp Si2.den_fmt Si2.charg_frm
+		```
+	Now edit the file `Si2.charg_frm` with a text editor to remove the first 11 lines. The file should now begin with `1 1 1` and a number. You can now open `Si2.charg_frm` with Vesta. Note that Vesta needs both the `.cell` and `.charge_frm` files to make a plot. If you are working on a remote machine you will need to copy both of these back to your local machine to view with Vesta. You can find a walkthrough video of this process [here](https://youtu.be/_c2Hk4jxmm4).
+
+		![Silicon Charge Density](../img/silicon_charge_density.png)
+		An alternative way to plot charge densities (and much more besides) is [c2x](https://www.c2x.org.uk).
+
+	### Answer the following questions:
+	1. Can you explain what you see as you vary the isosurface value?
+	1. Can you see any features which might be characteristic of a covalently-bonded crystal.
+	1. Do you notice anything strange about the electron density close to the Si nucleus? 
+	1. Can you explain this as a consequence of the particular kind of electronic structure calculation you have just performed?
 
 9. Repeat steps 1-8 using input files for sodium chloride and aluminium.
 
