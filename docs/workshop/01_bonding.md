@@ -40,28 +40,45 @@ If you want more information about a particular CASTEP keyword, or you want to f
 
 2. Unzip and untar them, then move into the new directory
 
-	```
+```
 $ gunzip Si2.tgz
 $ tar -xvf Si2.tar
 $ cd Si2
 ```
-3. Examine the CASTEP input files `Si2.cell` and `Si2.param` using your favourite text editor (e.g. `nano`).  The `Si_00.usp` file is a pseudopotential file, you do not need to understand it at the moment.
+3. Examine the CASTEP input files `Si2.cell` and `Si2.param` using your favourite text editor (e.g. `nano`).
+The `Si_00.usp` file is a pseudopotential file, you do not need to understand it at the moment.
 
-	```
+```
 $ nano Si2.cell
 $ nano Si2.param
 ```
 4. It is useful to view the structure before submitting your calculation using CASTEP. Copy the `Si2.cell` to your local machine using the sftp window (left) in mobaXterm.
 
-5. Open the `Si2.cell` file using [Jmol](http://www.jmol.org).  
-Open Jmol (You will need to copy it from the shared drive to your desktop. Uncompress it. Then double click `mol.jar`) then use File => Open and navigating to your `Si2.cell` file.
-Alternatively, you can drag and drop the `Si2.cell` file into the Jmol window, and Jmol will open it.  
+5. Cell Structure Visualisation
+	### Jmol.
+	To open the `Si2.cell` file using [Jmol](http://www.jmol.org):
+	Open Jmol (You will need to copy it from the shared drive to your desktop. Then double click `mol.jar`) 
+	then use `File => Open` and navigate to your `Si2.cell` file.
+	Alternatively, you can drag and drop the `Si2.cell` file into the Jmol window, and Jmol will open it.  
 
-	It can be helpful to view multiple repeat units of your unit cell.  The easiest way to do this in Jmol is to open a console window, click File => Console and type:
-	
+	It can be helpful to view multiple repeat units of your unit cell.  The easiest way to do this in Jmol is to open a console window,
+	click File => Console and type:
+
 	`$ load "" { 2 2 2 }`
-	
+
 	to show a 2x2x2 supercell.  Check the geometry of the input file is what you expect it to be before moving onto the next step.
+
+	### Vesta.
+	To open the `Si2.cell` file using [VESTA](http://www.jp-minerals.org/vesta/en/):
+	Open VESTA (You will need to copy it from the shared drive to your desktop. 
+	Then double click `VESTA.exe`) then use File => Open and navigate to your `Si2.cell` file.
+	You cannot drag and drop into VESTA.
+
+	If you wish to create a supercell as above, use `Objects => Boundary`. 
+	Then edit the maximum and/or minimum values of x, y, and z in order to change your boundaries.
+	Setting `x(max)`, `y(max)`, and `z(max)` to 2 will create the 2 by 2 by 2 supercell as above. 
+
+	Check the geometry of the input file is as expected before moving on to the next step.
 
 6. Now run CASTEP on Arcus using the 2-atom input files.
 
@@ -77,7 +94,7 @@ Alternatively, you can drag and drop the `Si2.cell` file into the Jmol window, a
 
 	Open the Jmol console (File => Console) and type the following commands:
 
-	```
+```
 $ load "" { 2 2 2 }
 $ isosurface rho cutoff 14 "Si2.den_fmt" lattice { 2 2 2 }
 ```
@@ -85,21 +102,22 @@ $ isosurface rho cutoff 14 "Si2.den_fmt" lattice { 2 2 2 }
 	* Jmol uses forward slash for paths to files on windows and linux based machines.
 This `Si2.den_fmt` file is a formatted file produced by CASTEP that contains the value of the electron density on a grid of points.  This isosurface command in Jmol plots an isodensity surface over your atomic positions.
 
-	### Answer the following questions:
-	1. Can you explain what you see as you vary the isosurface value?
-	1. Can you see any features which might be characteristic of a covalently-bonded crystal.
-	1. Do you notice anything strange about the electron density close to the Si nucleus? 
-	1. Can you explain this as a consequence of the particular kind of electronic structure calculation you have just performed?
+### Answer the following questions:
+1. Can you explain what you see as you vary the isosurface value?
+1. Can you see any features which might be characteristic of a covalently-bonded crystal.
+1. Do you notice anything strange about the electron density close to the Si nucleus? 
+1. Can you explain this as a consequence of the particular kind of electronic structure calculation you have just performed?
 
 9. Repeat steps 1-8 using input files for sodium chloride and aluminium.
 
-	```
+```
 $ wget http://www.castep.org/files/Al.tgz
 $ wget http://www.castep.org/files/NaCl.tgz
 ```
 
-	### Think about the following questions:
-	* Note what similarities and differences you find compared to silicon? 
-	* Does this help explain the difference in bond chemistry between silicon, sodium chloride and aluminium?
-	* Does this help explain why there are many reasonable classical potential functions for NaCl to be found in the simulation literature, but that finding good potentials for silicon is a very tough challenge?
-	* What about aluminium, can you find good potentials for aluminium?
+### Think about the following questions:
+* Note what similarities and differences you find compared to silicon? 
+* Does this help explain the difference in bond chemistry between silicon, sodium chloride and aluminium?
+* Does this help explain why there are many reasonable classical potential functions for NaCl to be found
+  in the simulation literature, but that finding good potentials for silicon is a very tough challenge?
+* What about aluminium, can you find good potentials for aluminium?
