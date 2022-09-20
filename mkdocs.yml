@@ -62,6 +62,10 @@ nav:
         -  'Magnetic Materials':      'tutorials/Bands_and_DOS/magnetic.md'
       - 'Dispersion corrections': 'tutorials/dispersion_corrections/castep-ase-dispersion-tutorial.md'
       - 'NMR Shielding': 'tutorials/NMR_shielding.md'
+   - 'Workshop':
+      - '0 Logging on': workshop/00_starting.md
+      - '1 Bonding   ': workshop/01_bonding.md
+      - '2 Bandstructure and DOS': workshop/02_bands_dos.md
 
 theme:
   name: material
