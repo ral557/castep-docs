@@ -35,9 +35,11 @@ Download the input files\\
 @@ wget http://www.castep.org/files/bandstructure.tgz@@\\
 
 
-Then untar and unzip it using:\\
-``` gunzip bandstructure.tgz ```\\
-@@ tar -xvf bandstructure.tar @@
+Then untar and unzip it using:
+
+gunzip bandstructure.tgz 
+
+ tar -xvf bandstructure.tar 
 
 ## Example 1 - Graphite.
 Move into the graphite directory, look at the CASTEP .cell and .param files and notice the differences from the previous single point energy runs.
