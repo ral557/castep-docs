@@ -20,7 +20,7 @@ If you want more information about a particular CASTEP keyword, or you want to f
 
 	To get more information on a particular input file keyword (e.g. `kpoint_mp_grid`) use:
 	
-	`$ castep --help kpoint_mp_grid`
+	`$ castep --help kpoints_mp_grid`
 
 	If you don't know the keyword you need to use, then you can search on a particular keyword. This returns a list of keywords that you might be interested in, e.g. to look at all keywords which contain a reference to symmetry.
 
