@@ -31,22 +31,21 @@ In addition to CASTEP and the suite of tools it comes with you will need:
 These are available on the Arcus cluster.
 
 ## Example files:
-Download the input files\\
-@@ wget http://www.castep.org/files/bandstructure.tgz@@\\
+Download the input files
+wget http://www.castep.org/files/bandstructure.tgz
 
 
 Then untar and unzip it using:
 
 gunzip bandstructure.tgz 
-
- tar -xvf bandstructure.tar 
+tar -xvf bandstructure.tar 
 
 ## Example 1 - Graphite.
 Move into the graphite directory, look at the CASTEP .cell and .param files and notice the differences from the previous single point energy runs.
 
-To the .param file the task (which lets CASTEP know what you want it to do) needs to be changed to:\\
-@@task : bandstructure@@\\
-The .cell file requires a path through the Brillouin Zone along which you want the bandstructure to be plotted:\\
+To the .param file the task (which lets CASTEP know what you want it to do) needs to be changed to:
+task : bandstructure
+The .cell file requires a path through the Brillouin Zone along which you want the bandstructure to be plotted:
 @@ %BLOCK BS_KPOINT_PATH\\
     0.0000  0.00000 0.00000  ! G\\
     0.0000  0.00000 0.50000  ! A\\
