@@ -36,7 +36,7 @@ Download the input files\\
 
 
 Then untar and unzip it using:\\
-@@ gunzip bandstructure.tgz @@\\
+``` gunzip bandstructure.tgz ```\\
 @@ tar -xvf bandstructure.tar @@
 
 ## Example 1 - Graphite.
