@@ -4,7 +4,7 @@
 * Running spin polarised calculations in CASTEP.
 
 !! Note
-This tutorial we will be running on Arcus, you should be able to complete this tutorial without copying files backwards and forwards; however if you wish to visualise your system (e.g. using Jmol) then you will need to copy files to your local machine to do so.
+This tutorial we will be running on Arcus, you should be able to complete this tutorial without copying files backwards and forwards; however if you wish to visualise your system (e.g. using VESTA) then you will need to copy files to your local machine to do so.
 
 If you don't remember how to do this, remind yourself by referring to [[ http://www.castep.org/Tutorials/00-unix |Tutorial 0 ]] and [[ http://www.castep.org/Tutorials/01-BasicsAndBonding |Tutorial 1 ]].
 
