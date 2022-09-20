@@ -6,7 +6,7 @@
 ## Note
 This tutorial we will be running on Arcus, you should be able to complete this tutorial without copying files backwards and forwards; however if you wish to visualise your system (e.g. using VESTA) then you will need to copy files to your local machine to do so.
 
-If you don't remember how to do this, remind yourself by referring to [[ http://www.castep.org/Tutorials/00-unix |Tutorial 0 ]] and [[ http://www.castep.org/Tutorials/01-BasicsAndBonding |Tutorial 1 ]].
+If you don't remember how to do this, remind yourself by referring to [Tutorial 0](../00_starting.md) and [Tutorial 1](../01_bonding.md)
 
 ## Xterminals, Plotting and other computational hassle
 To save some effort transferring files backwards and forwards to and from Arcus we are going to use Arcus to plot the band structure and DOS and send the image to your monitor. 
@@ -25,28 +25,32 @@ Finally you will look at the band structure of iron, to show how magnetic system
 
 ## You will need:
 In addition to CASTEP and the suite of tools it comes with you will need:
-* [[ http://plasma-gate.weizmann.ac.il/Grace/ | grace ]] - A 2D plotting program.
-* [[http://www.perl.org | perl ]] - a scripting language.
+* [Grace](http://plasma-gate.weizmann.ac.il/Grace/)  - A 2D plotting program.
+* [Perl](http://www.perl.org) - a scripting language.
 
 These are available on the Arcus cluster.
 
 ## Example files:
 Download the input files
+```
 wget http://www.castep.org/files/bandstructure.tgz
-
+```
 
 Then untar and unzip it using:
-
+```
 gunzip bandstructure.tgz 
 
 tar -xvf bandstructure.tar 
-
+```
 ## Example 1 - Graphite.
 Move into the graphite directory, look at the CASTEP .cell and .param files and notice the differences from the previous single point energy runs.
 
 To the .param file the task (which lets CASTEP know what you want it to do) needs to be changed to:
+```
 task : bandstructure
+```
 The .cell file requires a path through the Brillouin Zone along which you want the bandstructure to be plotted:
+```
 %BLOCK BS_KPOINT_PATH
 
     0.0000  0.00000 0.00000  ! G
@@ -66,19 +70,23 @@ The .cell file requires a path through the Brillouin Zone along which you want t
    -0.3333  0.66667 0.50000  ! H
   
 %ENDBLOCK BS_KPOINT_PATH 
-
+```
 Run CASTEP using:
-
+```
 $ castepsub -n 16 graphite 
-
-Once the CASTEP calculation has finished a @@graphite.bands@@ file will be present in the directory.  A band structure plot can be viewed by using the dispersion.pl tool.
-@@ $ dispersion.pl -xg -bs -symmetry hexagonal graphite.bands@@\\
+```
+Once the CASTEP calculation has finished a `graphite.bands` file will be present in the directory.  A band structure plot can be viewed by using the dispersion.pl tool.
+```
+$ dispersion.pl -xg -bs -symmetry hexagonal graphite.bands
+```
 The -xg option tells dispersion.pl that you are using grace to plot the band structure, the -bs option tells the script that you want to plot using CASTEP output files, the -symmetry hexagonal option labels the high symmetry points on the bands structure plot.
 
 When you view this band structure plot you will notice the bands are coloured from lowest to highest energy. Using information about the wavefunction CASTEP can improve this band structure plot, so bands are coloured due to the orbitals that contribute. The orbitals2bands tool can be used to alter the Si.bands file represent the orbitals that contribute to the bands.  This tool can be run in the same directory that you ran CASTEP in.\\
 The program orbitals2bands overwrites your Si.bands file, so it's best to copy it to another file to preserve it\\
-@@ $ cp graphite.bands graphite.bands.orig @@\\
-@@ $ orbitals2bandssub -n 16 graphite @@\\
+```
+$ cp graphite.bands graphite.bands.orig 
+$ orbitals2bandssub -n 16 graphite
+```
 
 orbitals2bandssub is a wrapper, similar to castepsub to run orbitals2bands on the compute nodes on arcus-b.
 
@@ -98,9 +106,10 @@ Compare the band structure of the Silicon and Aluminium crystals.
 
 In the iron directory there is a set of input files for iron. As iron is a magnetic system you need to instruct CASTEP that it is spin polarised.  You also need to set up the calculation with the total spin set to a non-zero value, in order to find the magnetic ground state. (If you're interested you could try removing the spin : 1 line from the Fe.param file and see what happens).  You set the spin in the .param file:
 
-@@ spin : 1\\
-spin_polarised : true@@
-
+```
+spin : 1
+spin_polarised : true
+```
 The path through the Brillouin Zone is found in the Fe.cell file.
 
 Run the iron computation using CASTEP and plot the band structure for iron using dispersion.pl.  You might find the -mono option to dispersion.pl to be useful - it colours the bands by spin channel.
@@ -109,14 +118,18 @@ Run the iron computation using CASTEP and plot the band structure for iron using
 
 To plot the density of states of iron, we need to run CASTEP again, instead of computing the band structure along a high symmetry line, we compute it on a grid.  To your Fe.cell file, remove the bs_kpoint_path block and replace it with:
 
-@@ BS_KPOINT_MP_GRID 12 12 12 @@
+```
+BS_KPOINT_MP_GRID 12 12 12
+````
 
-Run CASTEP using these new input files then use the dos.pl plotting script \\
-@@ dos.pl -xg -bs -w 0.2 Fe.bands @@
+Run CASTEP using these new input files then use the dos.pl plotting script 
+```
+dos.pl -xg -bs -w 0.2 Fe.bands
+```
 
 Can you relate the features in the DOS to those in the Bandstructure?
 
-You might find the @@-mirror@@ option useful. The @@-w@@ option sets the Gaussian broadening in eV. Try smaller (0.05) and larger (0.5) values - explain what you see.
+You might find the `-mirror` option useful. The `-w` option sets the Gaussian broadening in eV. Try smaller (0.05) and larger (0.5) values - explain what you see.
 
 DOS for the other crystals in this tutorial can be computed in a similar way.
 
