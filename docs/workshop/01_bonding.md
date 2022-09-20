@@ -54,28 +54,31 @@ $ nano Si2.param
 ```
 4. It is useful to view the structure before submitting your calculation using CASTEP. Copy the `Si2.cell` to your local machine using the sftp window (left) in mobaXterm.
 
-## Cell Structure Visualisation
-### Jmol.
-To open the `Si2.cell` file using [Jmol](http://www.jmol.org):
-Open Jmol (You will need to copy it from the shared drive to your desktop. Then double click `mol.jar`) then use `File => Open` and navigate to your `Si2.cell` file.
-Alternatively, you can drag and drop the `Si2.cell` file into the Jmol window, and Jmol will open it.  
+5. Cell Structure Visualisation
+	### Jmol.
+	To open the `Si2.cell` file using [Jmol](http://www.jmol.org):
+	Open Jmol (You will need to copy it from the shared drive to your desktop. Then double click `mol.jar`) 
+	then use `File => Open` and navigate to your `Si2.cell` file.
+	Alternatively, you can drag and drop the `Si2.cell` file into the Jmol window, and Jmol will open it.  
 
-It can be helpful to view multiple repeat units of your unit cell.  The easiest way to do this in Jmol is to open a console window,
-click File => Console and type:
+	It can be helpful to view multiple repeat units of your unit cell.  The easiest way to do this in Jmol is to open a console window,
+	click File => Console and type:
 
-`$ load "" { 2 2 2 }`
+	`$ load "" { 2 2 2 }`
 
-to show a 2x2x2 supercell.  Check the geometry of the input file is what you expect it to be before moving onto the next step.
+	to show a 2x2x2 supercell.  Check the geometry of the input file is what you expect it to be before moving onto the next step.
 
-### Vesta.
-To open the `Si2.cell` file using [VESTA](http://www.jp-minerals.org/vesta/en/):
-Open VESTA (You will need to copy it from the shared drive to your desktop. Then double click `VESTA.exe`) then use File => Open and navigate to your `Si2.cell` file.
-You cannot drag and drop into VESTA.
+	### Vesta.
+	To open the `Si2.cell` file using [VESTA](http://www.jp-minerals.org/vesta/en/):
+	Open VESTA (You will need to copy it from the shared drive to your desktop. 
+	Then double click `VESTA.exe`) then use File => Open and navigate to your `Si2.cell` file.
+	You cannot drag and drop into VESTA.
 
-If you wish to create a supercell as above, use `Objects => Boundary`. Then edit the maximum and/or minimum values of x, y, and z in order to change your boundaries.
-Setting x(max), y(max), and z(max) to 2 will create the 2 by 2 by 2 supercell as above. 
+	If you wish to create a supercell as above, use `Objects => Boundary`. 
+	Then edit the maximum and/or minimum values of x, y, and z in order to change your boundaries.
+	Setting `x(max)`, `y(max)`, and `z(max)` to 2 will create the 2 by 2 by 2 supercell as above. 
 
-Check the geometry of the input file is as expected before moving on to the next step.
+	Check the geometry of the input file is as expected before moving on to the next step.
 
 6. Now run CASTEP on Arcus using the 2-atom input files.
 
