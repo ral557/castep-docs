@@ -59,7 +59,7 @@ The `Si_00.usp` file is a pseudopotential file, you do not need to understand it
 5. Cell Structure Visualisation
 	* ### Jmol
 	To open the `Si2.cell` file using [Jmol](http://www.jmol.org):
-	Open Jmol (You will need to copy it from the shared drive to your desktop. Then double click `jmol.jar`) 
+	Open Jmol (You will need to copy it from the h: drive to your desktop. Then double click `jmol.jar`) 
 	then use `File => Open` and navigate to your `Si2.cell` file.
 	Alternatively, you can drag and drop the `Si2.cell` file into the Jmol window, and Jmol will open it. 
 	It can be helpful to view multiple repeat units of your unit cell.  The easiest way to do this in Jmol is to open a console window,
@@ -71,7 +71,7 @@ The `Si_00.usp` file is a pseudopotential file, you do not need to understand it
 
 	* ### Vesta
 	To open the `Si2.cell` file using [VESTA](http://www.jp-minerals.org/vesta/en/):
-	Open VESTA (You will need to copy it from the shared drive to your desktop. 
+	Open VESTA (You will need to copy it from the h: drive to your desktop. 
 	Then double click `VESTA.exe`) then use File => Open and navigate to your `Si2.cell` file.
 	You cannot drag and drop into VESTA.
 
