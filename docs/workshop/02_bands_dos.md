@@ -38,6 +38,7 @@ wget http://www.castep.org/files/bandstructure.tgz
 Then untar and unzip it using:
 
 gunzip bandstructure.tgz 
+
 tar -xvf bandstructure.tar 
 
 ## Example 1 - Graphite.
@@ -46,19 +47,29 @@ Move into the graphite directory, look at the CASTEP .cell and .param files and 
 To the .param file the task (which lets CASTEP know what you want it to do) needs to be changed to:
 task : bandstructure
 The .cell file requires a path through the Brillouin Zone along which you want the bandstructure to be plotted:
-@@ %BLOCK BS_KPOINT_PATH\\
-    0.0000  0.00000 0.00000  ! G\\
-    0.0000  0.00000 0.50000  ! A\\
-   -0.3333  0.66667 0.50000  ! H\\
-   -0.3333  0.66667 0.00000  ! K\\
-    0.0000  0.00000 0.00000  ! G\\
-    0.0000  0.50000 0.00000  ! M\\
-    0.0000  0.50000 0.50000  ! L\\
-   -0.3333  0.66667 0.50000  ! H\\
-%ENDBLOCK BS_KPOINT_PATH @@
+%BLOCK BS_KPOINT_PATH
 
-Run CASTEP using:\\
-@@ $ castepsub -n 16 graphite @@
+    0.0000  0.00000 0.00000  ! G
+    
+    0.0000  0.00000 0.50000  ! A
+    
+   -0.3333  0.66667 0.50000  ! H
+   
+   -0.3333  0.66667 0.00000  ! K
+   
+    0.0000  0.00000 0.00000  ! G
+    
+    0.0000  0.50000 0.00000  ! M
+    
+    0.0000  0.50000 0.50000  ! L
+    
+   -0.3333  0.66667 0.50000  ! H
+  
+%ENDBLOCK BS_KPOINT_PATH 
+
+Run CASTEP using:
+
+$ castepsub -n 16 graphite 
 
 Once the CASTEP calculation has finished a @@graphite.bands@@ file will be present in the directory.  A band structure plot can be viewed by using the dispersion.pl tool.
 @@ $ dispersion.pl -xg -bs -symmetry hexagonal graphite.bands@@\\
