@@ -66,6 +66,7 @@ nav:
       - '0 Logging on': workshop/00_starting.md
       - '1 Bonding   ': workshop/01_bonding.md
       - '2 Bandstructure and DOS': workshop/02_bands_dos.md
+      - '4 NMR Shielding': workshop/04_nmr_shiedling_efg.md
 
 theme:
   name: material
@@ -92,5 +93,7 @@ markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.tilde
   - footnotes
+  - attr_list
+  - md_in_html
 extra_css:
   - stylesheets/extra.css
