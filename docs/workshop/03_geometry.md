@@ -2,33 +2,68 @@
 
 ## Exercise 1 - H'_2_' dimer
 
-###Goal: Build H2.cell and H2.param files to compute the bond length of an H2 molecule.
+In this tutorial we will model the bond length of a H2 molecule. This will give you the opportunity to get used to 
+geometry optimisations and gain familiarity 
 
 Remember you can use `castep --help` to assist you with finding the appropriate input parameters.
 
-Things to consider:
-  ```
-* How big does your box need to be?
-* Do you want the size of your box to vary?
-* Set your initial H-H distance to 1 Angstrom.
-* Choose an appropriate plane-wave energy cut-off (cut_off_energy in the param file).
-* What k-point sampling do you need for this computation?
-* This is a geometry optimisation, choose an appropriate task (in the param file).
-```
-Start by creating a lattice block in your cell file.
+  
+  
+               * Set your initial H-H distance to 1 Angstrom.
+               * Choose an appropriate plane-wave energy cut-off (cut_off_energy in the param file).
+  * What k-point sampling do you need for this computation?
+               * This is a geometry optimisation, choose an appropriate task (in the param file).
+
+0. Create a new file, `H2.cell` using your favourite text editor, e.g.
 
   ```
-%block lattice_abc
-5 5 5 
-90 90 90
-%endblock lattice_abc
-```
+  nano H2.cell
+  ```
+  
+1. Start by creating a lattice block in your cell file.
+
+  ```
+  %block lattice_abc
+  5 5 5 
+  90 90 90
+  %endblock lattice_abc
+  ```
 
 or
-
+  ```
+  %block lattice_cart
+  5 0 0
+  0 5 0
+  0 0 5
+  %endblock lattice_cart
+  ```
+  
 Will produce a cube 5 Angstroms long on each side.
 
+**NOTE: ONLY USE ONE OF THESE TWO FORMATS**
 
+  Q: Is this a big enough box to represent a molecule? (Recall Periodic Boundary Conditions)
+  A: You may wish to test this by changing the size of the box!
+  
+  Q:
+
+2. Add atoms into our cell
+  This can be done either relative to the lattice vectors using
+
+  ```
+  %block positions_frac
+  H 0.5 0.5 0.5
+  H 0.5 0.5 0.2
+  %endblock positions_frac
+  ```
+   
+  or relative to the origin of the cell file
+  
+  ```
+  %block 
+  ```
+
+Variable size cell
 
 So far you've used the local density approximation (LDA) for the exchange-correlation functional in this exercise. Repeat your calculation with the PBE exchange-correlation functional (a popular GGA):
 
