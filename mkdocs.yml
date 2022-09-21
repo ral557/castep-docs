@@ -66,8 +66,9 @@ nav:
       - '0 Logging on': workshop/00_starting.md
       - '1 Bonding   ': workshop/01_bonding.md
       - '2 Bandstructure and DOS': workshop/02_bands_dos.md
+      - '3 Geometry Optimisation': workshop/03_geometry.md
       - '4 NMR Shielding': workshop/04_nmr_shiedling_efg.md
-
+      - '5 Phonons': workshop/05_phonon.md
 theme:
   name: material
 extra_javascript:

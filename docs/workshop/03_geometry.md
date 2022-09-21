@@ -1,6 +1,5 @@
 # Geometry Optimisation
 
-Throughout 
 
 ## Exercise 1 - Dihydrogen dimer
 
