@@ -139,6 +139,7 @@ C. Wavefunction Convergence
   ```
   elec_energy_tol: 0.1
   ```
+  
   This overwrites the default of `0.00001 ev` and will make the SCF convergence very fast. What does this do to the geometry optimisation?
   
   **NOTE:** This is not something you want to do in practice! Hopefully working through this example will demonstrate why.
@@ -153,15 +154,17 @@ C. Wavefunction Convergence
   Set CASTEP's parameters to perform a geometry optimisation using a 160 eV plane-wave cut-off energy and an 8x8x8 Monkhorst-Pack k-point grid:
   
   In `Si2.param`:
-    ```
-    task : geometry optimisation
-    cut_off_energy : 160 eV 
-    ```
+  
+  ```
+  task : geometry optimisation
+  cut_off_energy : 160 eV 
+  ```
+    
   In `Si2.cell`:
-
-    ```
-    kpoints_MP_grid 8 8 8
-    ```
+  
+  ```
+  kpoints_MP_grid 8 8 8
+  ```
 
   Because you're going to change the lattice vectors, CASTEP will do a finite basis-set correction (FBSC); this will calculate and print out dEtotal/dlog(Ecut) –         anything more than 0.1 eV/atom is big and a sign of incomplete convergence.
 
@@ -174,8 +177,25 @@ C. Wavefunction Convergence
 
 ## Exercise 3 - Graphene
 
-  It can be useful to know how to construct a monolayer material, such as graphene. 
-
-
-
+  It can be useful to know how to construct a monolayer material, such as graphene.
+  This requires the use of cell constraints so that we force a large distance between periodic images
+  (and we don't have the system collapse to form graphite!)
+  
+  In your `cell` file:
+  
+  ```
+  %block cell_constraints
+  1 1 0
+  3 4 5
+  %endblock cell_constraints
+  ```
+  
+  Will force the `a` and `b` lattice parameters to be the same (though free to vary jointly), fix the `c` lattice vector,
+  and let all angles relax independently. This is similar to the `%block lattice_abc` structure you saw earlier.
+  
+  For the mathematically minded, this is taking the limit that the interlayer spacing, controlled by the out-of-plane lattice vector, goes to infinity!
+  
+  Practically, we cannot actually set the lattice parameter to infinity - try varying it and seeing how it converges with distance.
+  
+  
 
