@@ -60,10 +60,35 @@ Will produce a cube 5 Angstroms long on each side.
   or relative to the origin of the cell file
   
   ```
-  %block 
+  %block positions_abs
+  H 3 3 3 
+  H 3 3 4
+  %endblock positions_abs
   ```
+  
+  Q: If you are varying the size of your unit cell for tests, which one will be more convenient?
 
-Variable size cell
+3. Add final components to unit cell
+  
+  ```
+  fix_all_cell: true
+  kpoint_mp_grid: 1 1 1
+  ```
+  
+  Q: Why do we only want to use a single k-point?
+    
+  Q: Why do we want to fix the lattice parameters rather than letting them relax?
+  
+4. Now close `H2.cell` and create a `H2.param` file
+
+In `H2.param` add
+
+```
+Task: GeometryOptimisation
+XC_Functional: LDA
+Cut_Off_energy: 
+```
+
 
 So far you've used the local density approximation (LDA) for the exchange-correlation functional in this exercise. Repeat your calculation with the PBE exchange-correlation functional (a popular GGA):
 
