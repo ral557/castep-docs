@@ -20,7 +20,7 @@ BN is one of a family of Nitride semiconductors, which occurs in cubic zincblend
   NCP
   %endblock species_pot
   ```
-  
+
   to select norm-conserving pseudopotentials.
 
   Choose the k-point set to use – **remove** any `block KPOINT_LIST` and replace with the line
@@ -37,7 +37,7 @@ BN is one of a family of Nitride semiconductors, which occurs in cubic zincblend
   castep.serial –dryrun h-BN
   ```
 
-  This tells Castep to read the intput files and summaries the calculation in the .castep file, but does not run the electronic structure calculation. It is very   useful to check syntax before submitting to a batch queue (and finding out later you’d made a spelling mistake!). 
+  This tells Castep to read the intput files and summaries the calculation in the .castep file, but does not run the electronic structure calculation. It is very   useful to check syntax before submitting to a batch queue (and finding out later you’d made a spelling mistake!).
   Check to see if any .err files are produced and fix issues, if any.
 If / when no errors are returned, congratulations.  You have set up the input files, and you can delete the dryrun .castep file.
 Once you have in place the `<seed>.cell` and `<seed>.param` files you are ready to submit the CASTEP job.  This is done using our general script:
@@ -51,7 +51,7 @@ which requests a 16-core parallel run. Use the `squeue -u $USER` command to moni
 2. Analysis of h-BN phonon output.
 
   We will use Castep’s tools to visualise the modes using the free Jmol visualiser.  
-  Use secure file transfer to copy the .phonon file back to the PC where Jmol is installed.  Start jmol and bring up a console window from the right-mouse menu. To use   the full power of the command-line and find the files it is most convenient to set Jmol's current directory to the location of your working directory containing your   output files. (It is possible and simpler to drag and drop the .phonon file onto Jmol window, but you need the power of the command line to display additional 
+  Use secure file transfer to copy the .phonon file back to the PC where Jmol is installed.  Start jmol and bring up a console window from the right-mouse menu. To use   the full power of the command-line and find the files it is most convenient to set Jmol's current directory to the location of your working directory containing your   output files. (It is possible and simpler to drag and drop the .phonon file onto Jmol window, but you need the power of the command line to display additional
   periodic repeats.)
   ```
   cd
@@ -75,26 +75,27 @@ which requests a 16-core parallel run. Use the `squeue -u $USER` command to moni
   dos.pl -ir -gp -np h-BN.phonon > h-BN-phonon.plt
   ```
   You can then copy the `h-BN-phonon.plt` back to the PC and read this into GNUPLOT.
-  
+
 ### Generation of Raman spectrum
   The calculation of a raman intensities is fairly expensive compared to infrared matrix elements and it is therefore not turned on by default however the `.param` file turned this on:
 ```
 CALCULATE_RAMAN : TRUE
+RAMAN_METHOD    : DFPT
 ```
 You can use the `-raman` flag of `dos.pl` to generate and plot a Raman spectrum.
 
 ## B. Molecular modes in benzene
 
   The next part of this practical is to compute the modes and spectrum of a molecule and compare the result with a calculation of a molecular crystal.  Our example is  benzene. You are supplied (in the workshop direxctory on arc, `/home/jryates/WORKSHOP`) with pdb files describing a benzene molecule and a high-pressure crystalline polymorph, phase III.
-  
+
   First run the isolated molecule calculation.  Using the supplied PDB format file and using the `pdb2cell` utility, generate a .cell file for a single molecule calculation.  There are a few other considerations to take into account for an isolated molecule calculation.
-  
+
   1. The size of the simulation cell governs the interactions between periodic copies of the molecule and should be large enough that these are negligible.
-  
+
   2. The shape of the simulation cell governs the crystallographic point groups allowed in the handling of the symmetry.  It should be chosen to be commensurate (as far as possible) with the molecular point group to maximise the use of symmetry.  In the case of benzene it should obviously be hexagonal, here we use a box 8A by 8A by 4A.
   3. Recall that there is no electronic dispersion for a molecule, so only a single electronic k-point is needed.  The general rule is that all “molecule in a box” calculations  should use the G point only as Castep uses special performance optimisations in this case.
   4. Use the norm-conserving pseudopotentials (`NCP` in the `species_pot` block)
-  
+
 For simplicity use the local density approximation, `LDA`.
 
 In benzene not all atoms are on special symmetry sites so you should first perform a geometry optimisation, keeping the unit cell fixed (see `fix_all_cell` keyword in Castep’s help). Then set up a follow-on calculation to compute the Gamma point phonons using the `continuation` keyword in the `.param` file.
@@ -161,7 +162,7 @@ The task here is to use the NaH example to compute and display not a dispersion 
    ```
    phonon_fine_kpoint_mp_grid 16 16 16
    ```
-   
+
 You can run CASTEP on just 1-4 processors for this
 You can try this several times with different fine q-point grids.
 This will produce a  `.castep` and `.phonon` file as before.   You may analyse the .phonon file and generate a DOS using the `dos.pl` script
